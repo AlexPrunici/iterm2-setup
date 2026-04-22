@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # =============================================================================
 # iTerm2 Minimal Developer Setup
-# No Oh My Zsh. No Powerlevel10k. Just a clean, fast, dev-ready terminal.
 #
 # What this installs:
+#   - iTerm2        — terminal emulator
 #   - Starship      — minimal cross-shell prompt (Rust, fast, no framework)
 #   - zsh plugins   — autosuggestions + syntax highlighting (standalone)
 #   - fzf           — fuzzy finder for history, files, git
@@ -53,7 +53,19 @@ else
   success "Homebrew updated"
 fi
 
-# ── 2. CLI tools ──────────────────────────────────────────────────────────────
+# ── 2. iTerm2 ─────────────────────────────────────────────────────────────────
+ITERM2_INSTALLED=false
+log "Checking iTerm2..."
+if brew list --cask iterm2 &>/dev/null || [[ -d "/Applications/iTerm.app" ]]; then
+  success "iTerm2 already installed"
+  ITERM2_INSTALLED=true
+else
+  log "Installing iTerm2..."
+  brew install --cask iterm2
+  success "iTerm2 installed"
+fi
+
+# ── 3. CLI tools ──────────────────────────────────────────────────────────────
 log "Installing CLI tools..."
 TOOLS=(starship fzf bat eza zoxide ripgrep fd lazygit)
 for tool in "${TOOLS[@]}"; do
@@ -65,7 +77,7 @@ for tool in "${TOOLS[@]}"; do
   fi
 done
 
-# ── 3. fzf shell integration ──────────────────────────────────────────────────
+# ── 4. fzf shell integration ──────────────────────────────────────────────────
 log "Setting up fzf shell integration..."
 if [[ -f "$HOME/.fzf.zsh" ]]; then
   success "fzf shell integration already configured"
@@ -74,7 +86,7 @@ else
   success "fzf integration done"
 fi
 
-# ── 4. Standalone zsh plugins (no Oh My Zsh needed) ──────────────────────────
+# ── 5. Standalone zsh plugins ──────────────────────────
 ZSH_PLUGINS_DIR="$HOME/.zsh/plugins"
 mkdir -p "$ZSH_PLUGINS_DIR"
 
@@ -96,7 +108,7 @@ else
   success "zsh-syntax-highlighting installed"
 fi
 
-# ── 5. Font: JetBrains Mono Nerd Font ────────────────────────────────────────
+# ── 6. Font: JetBrains Mono Nerd Font ────────────────────────────────────────
 log "Installing JetBrains Mono Nerd Font..."
 if brew list --cask font-jetbrains-mono-nerd-font &>/dev/null; then
   success "JetBrains Mono Nerd Font already installed"
@@ -106,7 +118,7 @@ else
   success "JetBrains Mono Nerd Font installed"
 fi
 
-# ── 6. Starship config ────────────────────────────────────────────────────────
+# ── 7. Starship config ────────────────────────────────────────────────────────
 log "Writing Starship config (~/.config/starship.toml)..."
 mkdir -p "$HOME/.config"
 
@@ -185,7 +197,7 @@ EOF
 
 success "Starship config written"
 
-# ── 7. Catppuccin Macchiato color scheme ──────────────────────────────────────
+# ── 8. Catppuccin Macchiato color scheme ──────────────────────────────────────
 THEME_FILE="$HOME/Downloads/catppuccin-macchiato.itermcolors"
 log "Downloading Catppuccin Macchiato color scheme..."
 if [[ -f "$THEME_FILE" ]]; then
@@ -198,7 +210,7 @@ else
 fi
 open "$THEME_FILE" 2>/dev/null || warn "Could not auto-open — open it manually from ~/Downloads"
 
-# ── 8. Write clean ~/.zshrc ───────────────────────────────────────────────────
+# ── 9. Write clean ~/.zshrc ───────────────────────────────────────────────────
 ZSHRC="$HOME/.zshrc"
 MARKER="# ── iterm2-minimal-setup additions ──"
 
@@ -235,7 +247,7 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'  # case-insensitive
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
-# ── Plugins (standalone, no Oh My Zsh) ───────────────────────────────────────
+# ── Plugins (standalone) ───────────────────────────────────────
 source "$HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$HOME/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
@@ -276,6 +288,14 @@ echo -e "${GREEN}${BOLD}━━━━━━━━━━━━━━━━━━�
 echo -e "${GREEN}${BOLD}  ✓ Done!${RESET}"
 echo -e "${GREEN}${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
 echo ""
+
+if [[ "$ITERM2_INSTALLED" == false ]]; then
+  echo -e "${YELLOW}${BOLD}iTerm2 was just installed.${RESET}"
+  echo -e "  You're currently in $(basename "$SHELL") in your old terminal."
+  echo -e "  ${BOLD}Open iTerm2 now${RESET} to continue with the steps below."
+  echo ""
+fi
+
 echo -e "${BOLD}3 manual steps in iTerm2:${RESET}"
 echo ""
 echo -e "  1. ${CYAN}Preferences → Profiles → Colors → Color Presets${RESET}"
