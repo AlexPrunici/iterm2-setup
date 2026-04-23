@@ -69,10 +69,10 @@ source ~/.zshrc
 ## Aliases added to your shell
 
 ```bash
-ls    → eza --icons               # icons, colors
-ll    → eza -la --icons --git     # long list with git status
-la    → eza -a --icons            # show hidden files
-tree  → eza --tree --icons        # directory tree
+ls    → eza                       # icons, colors
+ll    → eza -la --git             # long list with git status
+la    → eza -a                    # show hidden files
+tree  → eza --tree                # directory tree
 cat   → bat                       # syntax highlighted
 grep  → rg                        # ripgrep
 find  → fd                        # fd
