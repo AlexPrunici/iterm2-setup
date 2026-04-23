@@ -261,10 +261,10 @@ export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range=:50 {}'"
 eval "$(zoxide init zsh)"
 
 # ── Aliases ───────────────────────────────────────────────────────────────────
-alias ls='eza --icons'
-alias ll='eza -la --icons --git'
-alias la='eza -a --icons'
-alias tree='eza --tree --icons --level=2'
+alias ls='eza'
+alias ll='eza -la --git'
+alias la='eza -a'
+alias tree='eza --tree --level=2'
 alias cat='bat'
 alias grep='rg'
 alias find='fd'
@@ -298,13 +298,13 @@ fi
 
 echo -e "${BOLD}3 manual steps in iTerm2:${RESET}"
 echo ""
-echo -e "  1. ${CYAN}Preferences → Profiles → Colors → Color Presets${RESET}"
+echo -e "  1. ${CYAN}Preferences → Settings → Colors → Color Presets${RESET}"
 echo -e "     → select ${BOLD}Catppuccin Macchiato${RESET}"
 echo ""
-echo -e "  2. ${CYAN}Preferences → Profiles → Text → Font${RESET}"
-echo -e "     → select ${BOLD}JetBrainsMono Nerd Font${RESET}, size 13"
+echo -e "  2. ${CYAN}Preferences → Settings → Text → Font${RESET}"
+echo -e "     → select ${BOLD}JetBrainsMono Nerd Font${RESET}, thin, size 13"
 echo ""
-echo -e "  3. ${CYAN}Preferences → Profiles → Keys → Key Mappings → Presets${RESET}"
+echo -e "  3. ${CYAN}Preferences → Settings → Keys → Key Bindings → Presets${RESET}"
 echo -e "     → select ${BOLD}Natural Text Editing${RESET}"
 echo ""
 echo -e "  Then reload: ${CYAN}source ~/.zshrc${RESET}"

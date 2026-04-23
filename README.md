@@ -36,8 +36,8 @@ Written in Rust. Shows git branch, status, and language versions (Node, Python, 
 ```bash
 git clone https://github.com/AlexPrunici/iterm2-setup.git
 cd iterm2-setup
-chmod +x iterm2-minimal-setup.sh
-./iterm2-minimal-setup.sh
+chmod +x iterm2-setup.sh
+./iterm2-setup.sh
 ```
 
 The script is idempotent — safe to run multiple times. It skips anything already installed and backs up your `.zshrc` before modifying it.
@@ -49,13 +49,13 @@ The script is idempotent — safe to run multiple times. It skips anything alrea
 Three things to do manually inside iTerm2 (these can't be scripted without touching raw plist files):
 
 **1. Apply the color scheme**  
-`Preferences → Profiles → Colors → Color Presets` → select **Catppuccin Macchiato**
+`Settings → Profiles → Colors → Color Presets` → select **Catppuccin Macchiato**
 
 **2. Set the font**  
-`Preferences → Profiles → Text → Font` → select **JetBrainsMono Nerd Font**, size **13**
+`Settings → Profiles → Text → Font` → select **JetBrainsMono Nerd Font**, size **13**, thin
 
 **3. Enable natural text editing**  
-`Preferences → Profiles → Keys → Key Mappings → Presets` → **Natural Text Editing**  
+`Settings → Profiles → Keys → Key Bindings → Presets` → **Natural Text Editing**  
 This makes `Option+←/→` jump words and `Cmd+Delete` clear the line — like any text editor.
 
 Then reload your shell:
